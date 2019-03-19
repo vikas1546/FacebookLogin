@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Test1";
+}
+
+<h2>Test1</h2>
+
+@*1.<input type="button" value="LoginFB" onclick="LoginFB();" />*@
+
+2.<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+
+@*3.<div class="fb-login-button"  data-width="200" data-max-rows="1" >Login Facebook</div>
+@*//data-show-faces="true"*@ 
+
+
+ 
+
+
+
+@section scripts {
+
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2040407262662481',
+                cookie: true,
+                xfbml: true,
+                version: 'v3.2',
+                cache: false
+            });
+
+            //  FB.AppEvents.logPageView();
+
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+
+
+           // FB.Event.subscribe('xfbml.render', finished_rendering);
+
+           // FB.XFBML.parse();
+
+        };  // window.fbAsyncInit end
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+           // js.src = "https://connect.facebook.net/en_US/sdk.js";
+            js.src = "//connect.facebook.net/en_US/all.js"
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+
+        function statusChangeCallback(response) {
+            if (response.status === "connected") {
+                console.log("Logged In and Authenticated");
+                //parent.window.location.href = "home/Landing";
+                //https://localhost:44346/home/Landing
+               // window.top.location.href = "https://localhost:44346/home/Landing";
+            }
+            else {
+                console.log("Not Authenticated");
+            }
+        }
+
+
+
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+      
+
+        function LoginFB() {
+            FB.login(function (response) {
+                 // handle the response
+                console.log(response)
+                console.log(response.authResponse.userID)
+                if (status === "connected") {
+                //    parent.window.location.href = "/home/index";
+                }
+            }, { scope: 'public_profile,email' });
+        }
+
+
+
+        //var finished_rendering = function () {
+        //    console.log("finished rendering plugins");
+        //    var spinner = document.getElementById("spinner");
+        //    spinner.removeAttribute("style");
+        //    spinner.removeChild(spinner.childNodes[0]);
+        //}
+       
+
+
+
+
+    </script>
+}
+

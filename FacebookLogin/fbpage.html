@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <style type="text/css">
+        .fb_iframe_widget iframe {
+            position: relative!important;
+        }
+
+
+        .fb_login span {
+            height: 25px !important;
+            width: 150px !important
+        }
+    </style>
+</head>
+<body>
+    222.<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+
+
+
+
+    <script type="text/javascript">
+      
+
+
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2040407262662481',
+                cookie: true,
+                xfbml: true,
+                version: 'v2.8'
+            });
+
+             FB.AppEvents.logPageView();
+
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+
+
+            // FB.Event.subscribe('xfbml.render', finished_rendering);
+
+            // FB.XFBML.parse();
+
+        };  // window.fbAsyncInit end
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+
+        function statusChangeCallback(response) {
+            if (response.status === "connected") {
+                console.log("Logged In and Authenticated");
+            }
+            else {
+                console.log("Not Authenticated");
+            }
+        }
+
+
+
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+
+
+        function LoginFB() {
+            FB.login(function (response) {
+                // handle the response
+                console.log(response)
+                console.log(response.authResponse.userID)
+                if (status === "connected") {
+                    console.log("User is connected");
+                    parent.window.location.href = "/home/index";
+                }
+            }, { scope: 'public_profile,email' });
+        }
+
+
+
+            //var finished_rendering = function () {
+            //    console.log("finished rendering plugins");
+            //    var spinner = document.getElementById("spinner");
+            //    spinner.removeAttribute("style");
+            //    spinner.removeChild(spinner.childNodes[0]);
+            //}
+
+
+
+
+
+    </script>
+</body>
+
+
+
+</html>
